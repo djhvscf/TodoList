@@ -1,23 +1,53 @@
 var myTodoList = angular.module('TodoListApp',[]).controller('toDoListCtrl', function($scope, $timeout) {
-    $scope.categories = ["Tarea", "Cocina", "Colegio", "Casa", "Proyecto 3", "Componentes"];
     $scope.idTodo = 1;
     $scope.searchTodo = "";
     $scope.todos = [{id: $scope.idTodo++, name: "Aprender angular", categorie: "Proyecto 3", done: true},
                     {id: $scope.idTodo++, name: "Cocinar el almuerzo", categorie: "Cocina", done: false},
                     {id: $scope.idTodo++, name: 'Tarea de mate', categorie: "Colegio", done: false}];
 
+	$scope.categories = [{
+        name: 'Tarea',
+        value: '0',
+        style: 'color: #ffffff;' + 'background-color: #1e90ff;',
+        checked: false
+    }, {
+        name: 'Cocina',
+        value: '1',
+        style: 'color: #3c763d;' + 'background-color: #dff0d8;',
+        checked: false
+    },{
+        name: 'Colegio',
+        value: '2',
+        style: 'color: #31708f;' + 'background-color: #d9edf7;',
+        checked: false
+    },{
+        name: 'Casa',
+        value: '3',
+        style: 'color: #8a6d3b;' + 'background-color: #fcf8e3;',
+        checked: false
+    },{
+        name: 'Proyecto 3',
+        value: '4',
+        style: 'color: #a94442;' + 'background-color: #f2dede;',
+        checked: false
+    }];
+	
+	
     $scope.isActive = true;
 	$scope.isActiveDone = true;
 	
-	/*debugger;
+	$scope.select = function(value){
+        //for es más rápido que angular.forEach()
+        for (i = 0; i < $scope.todos.length; i++) {
+            if($scope.todos[i].value == value){
+                $scope.todos[i].visible = (!$scope.todos[i].visible) ? true : false;
+            }
+        }
+    }
 	
-	/*var personaAGuardar = JSON.stringify($scope.todos);
-	localStorage.setItem("todos", personaAGuardar);
-	var personaGuardada = localStorage.getItem("todos");*/
- 
-	/*$scope.todos = JSON.parse(localStorage.getItem("todos"));*/
-
-	
+	$scope.check = function(item){
+        item.checked = item.checked ? false : true;
+    }
 	
     $scope.addTodo = function() {
         if ($scope.todoName === "") {
