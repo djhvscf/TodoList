@@ -9,6 +9,7 @@
     <script src="Js/angular-local-storage.js"></script>
     <script type="text/javascript" src="Js/jquery.min.js"></script>
     <script type="text/javascript" src="Js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="Js/angular-local-storage.js"></script>
     <script type="text/javascript" ng-autobind src="http://code.angularjs.org/0.9.16/angular-0.9.16.js"></script>
     <script type="text/javascript" ng-autobind src="Js/toDoListCtrl.js"></script>
 </head>
@@ -52,11 +53,11 @@
         <ul ng-repeat="todo in todos | filter:{done: false, name:searchTodo}">
             <li>
                 <div ng-controller="toDoListEditCtrl">
-                    <span ng-hide="editorEnabled" ng-click="enableEditor(todo)" ng-class="{true: 'active', false: 'inactive'}[isActive]">
+                    <span ng-hide="editorEnabled" ng-click="enableEditor(todo)" ng-class="{true: 'active', false: 'inactive'}[isActiveDone]">
                         <b>{{todo.name}}</b> ({{todo.categorie}})
                     </span>
                     <button ng-click="todo.done = true" class="btn btn-success">Done</button>
-                    <button ng-click="remove(todo)" class="btn btn-danger">Delete</button>
+                    <button ng-click="removeDone(todo)" class="btn btn-danger">Delete</button>
                     <span ng-show="editorEnabled" >
                         <input type="text" size="30" name="todoNameEdit" ng-model="todoNameEdit" ng-required />
                         <select name="todoCategorieEdit" ng-model="todoCategorieEdit">
